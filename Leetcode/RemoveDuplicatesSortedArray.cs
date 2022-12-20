@@ -2,56 +2,25 @@ namespace Leetcode;
 
 public class RemoveDuplicatesSortedArray
 {
-    private void _shift(int[] nums, int index)
-    {
-        _shiftMany(nums, index, 1);
-    }
     public int RemoveDuplicates(int[] nums)
     {
-        /*
-        for (var i = 0; i < nums.Length - 1; i++)
+        var read = 1;
+        var write = 1;
+        while(read < nums.Length)
         {
-            var j = i;
-            while (j < nums.Length - 1 && nums[i] == nums[i+1])
+            if (nums[read] == nums[read - 1])
             {
-                _shift(nums, i);
-                j++;
+                read++;
             }
-        }
-        */
-        _removeDuplicatesFast(nums);
-        
-        var count = 0;
-        while (count < nums.Length - 1 && nums[count] != nums[count + 1])
-        {
-            count++;
-        }
-        
-        return count + 1;
-    }
-
-    private void _removeDuplicatesFast(int[] nums)
-    {
-        for (var i = 0; i < nums.Length - 1; i++)
-        {
-            if (nums[i] >= nums[i + 1])
+            else
             {
-                var j = i + 1;
-                while (j < nums.Length - 1 && nums[i + 1] == nums[j + 1])
-                {
-                    j++;
-                }
-
-                nums[i] = nums[j];
+                nums[write] = nums[read];
+                write++;
+                read++;
             }
-        }
-    }
 
-    private void _shiftMany(int[] nums, int atIndex, int amount)
-    {
-        for (var i = atIndex + 1; i < nums.Length - amount; i++)
-        {
-            nums[i] = nums[i + amount];
         }
+
+        return write;
     }
 }
