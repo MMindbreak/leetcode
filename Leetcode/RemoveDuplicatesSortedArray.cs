@@ -18,7 +18,6 @@ public class RemoveDuplicatesSortedArray
                 write++;
                 read++;
             }
-
         }
 
         return write;
