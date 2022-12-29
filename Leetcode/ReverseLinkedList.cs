@@ -1,6 +1,8 @@
+using System.Security.Cryptography;
+
 namespace Leetcode;
 
-public class ListNode {
+fpublic class ListNode {
     public int val;
     public ListNode? next;
      
@@ -13,18 +15,31 @@ public class ReverseLinkedList
 {
     public ListNode ReverseList(ListNode head)
     {
+        if (head == null)
+            return head;
+        
         if (head.next == null)
             return head;
+        
+        ListNode cur = head;
+        ListNode? prev = null;
 
-        var cur = head;
-        var next = cur.next;
         while (cur.next != null)
         {
-            next.next = cur;
+            if (prev == null)
+            {
+                prev = cur;
+                cur = cur.next;
+                continue;
+            }
+            var next = cur.next;
+            cur.next = prev;
+            prev = cur;
             cur = next;
-            next = next.next;
         }
 
+        cur.next = prev;
+        
         return cur;
     }
 }

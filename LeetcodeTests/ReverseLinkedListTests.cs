@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Leetcode;
 using NUnit.Framework;
 
@@ -21,5 +22,27 @@ public class ReverseLinkedListTests
             Assert.That(res.next.next.next.val, Is.EqualTo(2));
             Assert.That(res.next.next.next.next.val, Is.EqualTo(1));
         });
+    }
+
+    [Test]
+    public void Test2()
+    {
+        var list = new ListNode(1, new ListNode(2));
+        var c = new ReverseLinkedList();
+        var res = c.ReverseList(list);
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(res.val, Is.EqualTo(2));
+            Assert.That(res.next.val, Is.EqualTo(1)); });
+    }
+
+    [Test]
+    public void Test3()
+    {
+        ListNode list = null;
+        var c = new ReverseLinkedList();
+        var res = c.ReverseList(list);
+        Assert.That(res, Is.Null);
     }
 }
